@@ -6,6 +6,7 @@
     <title>Checklist App</title>
     <style>
         :root {
+            /* Light theme variables */
             --bg: #ffffff;
             --surface: #f5f7fa;
             --text: #111111;
@@ -24,6 +25,106 @@
             --transition: 0.2s ease;
             --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
             --card-width: 300px;
+
+            /* Additional UI variables */
+            --card-bg: #ffffff;
+            --card-header-bg: #f8f9fb;
+            --task-item-bg: #fafbfc;
+            --task-item-hover-bg: #f0f3f6;
+            --modal-bg: #ffffff;
+            --modal-text: #111;
+            --input-bg: #fff;
+            --input-border: #d5d8dd;
+            --delete-btn-color: #999;
+            --delete-btn-hover-bg: #fde8e8;
+            --delete-btn-hover-color: #c62828;
+            --btn-ghost-bg-hover: #e8e8e8;
+            --btn-ghost-text: #555;
+            --frequency-border: #e0e0e0;
+            --toast-bg: #111;
+            --toast-text: #fff;
+            --settings-cog-bg: var(--blue-deep);
+            --settings-cog-border: #fff;
+            --header-bg: var(--blue-deep);
+            --header-text: #fff;
+            --task-text-color: #1a1a1a;
+            --task-text-completed: #666;
+            --add-row-bg: #fafbfc;
+            --empty-text: #777;
+            --badge-bg: #fff;
+            --badge-text: var(--blue-primary);
+            --btn-outline-text: #fff;
+            --btn-outline-border: rgba(255, 255, 255, 0.6);
+            --btn-outline-hover-bg: rgba(255, 255, 255, 0.1);
+            --btn-outline-hover-border: #fff;
+            --danger-btn-bg: #c62828;
+            --danger-btn-border: #c62828;
+            --danger-btn-hover-bg: #b71c1c;
+            --reset-daily-border: #1a3d6d;
+            --reset-daily-text: #1a3d6d;
+            --reset-weekly-border: #1e5ab5;
+            --reset-weekly-text: #1e5ab5;
+            --reset-monthly-border: #2979ff;
+            --reset-monthly-text: #2979ff;
+            --reset-yearly-border: #5a9cff;
+            --reset-yearly-text: #3b7ddd;
+        }
+
+        .dark-mode {
+            --bg: #12151c;
+            --surface: #1e222a;
+            --text: #e0e0e0;
+            --text-secondary: #c0c0c0;
+            --blue-deep: #0a1526;
+            --blue-primary: #1b3458;
+            --blue-accent: #2a6dd4;
+            --blue-bright: #448aff;
+            --blue-light: #25344a;
+            --border: #444;
+            --border-light: #555;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.8);
+            --card-bg: #262b33;
+            --card-header-bg: #2f343d;
+            --task-item-bg: #2f343d;
+            --task-item-hover-bg: #3a404a;
+            --modal-bg: #2a2f38;
+            --modal-text: #e0e0e0;
+            --input-bg: #1e222a;
+            --input-border: #555;
+            --delete-btn-color: #aaa;
+            --delete-btn-hover-bg: #5c2a2a;
+            --delete-btn-hover-color: #ff7b7b;
+            --btn-ghost-bg-hover: #3a3f48;
+            --btn-ghost-text: #ccc;
+            --frequency-border: #444;
+            --toast-bg: #e0e0e0;
+            --toast-text: #111;
+            --settings-cog-bg: #1b3458;
+            --settings-cog-border: #ddd;
+            --header-bg: #0a1526;
+            --header-text: #fff;
+            --task-text-color: #e0e0e0;
+            --task-text-completed: #aaa;
+            --add-row-bg: #2f343d;
+            --empty-text: #aaa;
+            --badge-bg: #1b3458;
+            --badge-text: #fff;
+            --btn-outline-text: #ddd;
+            --btn-outline-border: rgba(255, 255, 255, 0.4);
+            --btn-outline-hover-bg: rgba(255, 255, 255, 0.15);
+            --btn-outline-hover-border: #fff;
+            --danger-btn-bg: #b71c1c;
+            --danger-btn-border: #ff8a80;
+            --danger-btn-hover-bg: #c62828;
+            --reset-daily-border: #448aff;
+            --reset-daily-text: #448aff;
+            --reset-weekly-border: #5a9cff;
+            --reset-weekly-text: #5a9cff;
+            --reset-monthly-border: #82b1ff;
+            --reset-monthly-text: #82b1ff;
+            --reset-yearly-border: #b0c6ff;
+            --reset-yearly-text: #b0c6ff;
         }
 
         * {
@@ -34,17 +135,18 @@
 
         body {
             font-family: var(--font);
-            background: #eef1f5;
+            background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* ── Header ─────────────────────── */
         .app-header {
-            background: var(--blue-deep);
-            color: #ffffff;
+            background: var(--header-bg);
+            color: var(--header-text);
             padding: 18px 28px;
             display: flex;
             align-items: center;
@@ -93,12 +195,12 @@
         }
         .btn-outline {
             background: transparent;
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.6);
+            color: var(--btn-outline-text);
+            border-color: var(--btn-outline-border);
         }
         .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #fff;
+            background: var(--btn-outline-hover-bg);
+            border-color: var(--btn-outline-hover-border);
         }
         .btn-sm {
             padding: 6px 12px;
@@ -112,23 +214,23 @@
             border-width: 1.5px;
         }
         .btn-danger {
-            background: #c62828;
+            background: var(--danger-btn-bg);
             color: #fff;
-            border-color: #c62828;
+            border-color: var(--danger-btn-border);
         }
         .btn-danger:hover {
-            background: #b71c1c;
-            border-color: #b71c1c;
+            background: var(--danger-btn-hover-bg);
+            border-color: var(--danger-btn-border);
         }
         .btn-ghost {
             background: transparent;
-            color: #555;
+            color: var(--btn-ghost-text);
             border-color: transparent;
             padding: 4px 8px;
         }
         .btn-ghost:hover {
-            background: #e8e8e8;
-            color: #111;
+            background: var(--btn-ghost-bg-hover);
+            color: var(--text);
         }
 
         /* ── Main Layout ────────────────── */
@@ -138,10 +240,10 @@
         }
         .frequency-section {
             margin-bottom: 32px;
-            background: #fff;
+            background: var(--surface);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--frequency-border);
             overflow: hidden;
         }
         .frequency-header {
@@ -165,8 +267,8 @@
             gap: 8px;
         }
         .frequency-header .badge {
-            background: #fff;
-            color: var(--blue-primary);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             font-size: 0.78rem;
             font-weight: 700;
             padding: 3px 10px;
@@ -201,7 +303,7 @@
         .empty-group {
             padding: 28px 20px;
             text-align: center;
-            color: #777;
+            color: var(--empty-text);
             font-style: italic;
             font-size: 0.9rem;
             min-height: 80px;
@@ -215,8 +317,8 @@
         .category-card {
             flex: 0 0 var(--card-width);
             width: var(--card-width);
-            background: #fff;
-            border: 2px solid #d5d8dd;
+            background: var(--card-bg);
+            border: 2px solid var(--border-light);
             border-radius: var(--radius);
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
             display: flex;
@@ -230,7 +332,7 @@
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
         }
         .card-header {
-            background: #f8f9fb;
+            background: var(--card-header-bg);
             padding: 11px 14px;
             border-bottom: 2px solid #e2e5ea;
             display: flex;
@@ -243,7 +345,7 @@
         .card-header .cat-name {
             font-weight: 700;
             font-size: 0.95rem;
-            color: #111;
+            color: var(--text);
             flex: 1;
             min-width: 0;
             overflow: hidden;
@@ -255,7 +357,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            color: #999;
+            color: var(--delete-btn-color);
             font-size: 1.2rem;
             line-height: 1;
             padding: 2px 6px;
@@ -264,8 +366,8 @@
             flex-shrink: 0;
         }
         .card-header .delete-cat-btn:hover {
-            color: #c62828;
-            background: #fde8e8;
+            color: var(--delete-btn-hover-color);
+            background: var(--delete-btn-hover-bg);
         }
         .task-list {
             flex: 1;
@@ -297,16 +399,16 @@
             padding: 6px 8px;
             border-radius: var(--radius-sm);
             transition: var(--transition);
-            background: #fafbfc;
+            background: var(--task-item-bg);
             border: 1px solid transparent;
         }
         .task-item:hover {
-            background: #f0f3f6;
+            background: var(--task-item-hover-bg);
             border-color: #dde1e6;
         }
         .task-item.completed .task-text {
             text-decoration: line-through;
-            color: #888;
+            color: var(--task-text-completed);
             text-decoration-thickness: 2px;
             text-decoration-color: #555;
         }
@@ -322,20 +424,20 @@
         .task-text {
             flex: 1;
             font-size: 0.9rem;
-            color: #1a1a1a;
+            color: var(--task-text-color);
             word-break: break-word;
             min-width: 0;
             letter-spacing: 0.1px;
         }
         .task-item.completed .task-text {
-            color: #666;
+            color: var(--task-text-completed);
         }
         .delete-task-btn {
             flex-shrink: 0;
             background: none;
             border: none;
             cursor: pointer;
-            color: #bbb;
+            color: var(--delete-btn-color);
             font-size: 1rem;
             padding: 2px 5px;
             border-radius: 3px;
@@ -343,8 +445,8 @@
             line-height: 1;
         }
         .delete-task-btn:hover {
-            color: #c62828;
-            background: #fde8e8;
+            color: var(--delete-btn-hover-color);
+            background: var(--delete-btn-hover-bg);
         }
         .no-tasks {
             text-align: center;
@@ -358,20 +460,20 @@
             gap: 6px;
             padding: 10px 12px;
             border-top: 2px solid #e8ebef;
-            background: #fafbfc;
+            background: var(--add-row-bg);
             border-radius: 0 0 var(--radius) var(--radius);
         }
         .add-task-row input {
             flex: 1;
             min-width: 0;
             padding: 8px 10px;
-            border: 2px solid #d5d8dd;
+            border: 2px solid var(--input-border);
             border-radius: var(--radius-sm);
             font-size: 0.85rem;
             font-family: var(--font);
             transition: var(--transition);
-            background: #fff;
-            color: #111;
+            background: var(--input-bg);
+            color: var(--text);
         }
         .add-task-row input:focus {
             outline: none;
@@ -411,9 +513,9 @@
             width: 52px;
             height: 52px;
             border-radius: 50%;
-            background: var(--blue-deep);
+            background: var(--settings-cog-bg);
             color: #fff;
-            border: 3px solid #fff;
+            border: 3px solid var(--settings-cog-border);
             box-shadow: var(--shadow-lg);
             cursor: pointer;
             font-size: 1.6rem;
@@ -448,7 +550,7 @@
             display: flex;
         }
         .modal {
-            background: #fff;
+            background: var(--modal-bg);
             border-radius: var(--radius);
             box-shadow: var(--shadow-lg);
             padding: 28px 26px 22px;
@@ -456,13 +558,14 @@
             width: 100%;
             max-height: 85vh;
             overflow-y: auto;
-            border: 2px solid #1a1a1a;
+            border: 2px solid var(--border);
             position: relative;
+            color: var(--modal-text);
         }
         .modal h3 {
             font-size: 1.25rem;
             margin-bottom: 18px;
-            color: #111;
+            color: var(--modal-text);
             font-weight: 700;
             letter-spacing: -0.2px;
         }
@@ -473,7 +576,7 @@
             display: block;
             font-weight: 600;
             margin-bottom: 5px;
-            color: #1a1a1a;
+            color: var(--modal-text);
             font-size: 0.9rem;
             letter-spacing: 0.2px;
         }
@@ -481,12 +584,12 @@
         .modal select {
             width: 100%;
             padding: 10px 12px;
-            border: 2px solid #555;
+            border: 2px solid var(--input-border);
             border-radius: var(--radius-sm);
             font-size: 0.95rem;
             font-family: var(--font);
-            background: #fff;
-            color: #111;
+            background: var(--input-bg);
+            color: var(--text);
             transition: var(--transition);
         }
         .modal input[type="text"]:focus,
@@ -511,7 +614,7 @@
         }
         .modal .divider {
             border: none;
-            border-top: 2px solid #e0e0e0;
+            border-top: 2px solid var(--border-light);
             margin: 18px 0;
         }
         .modal .settings-section {
@@ -522,18 +625,20 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.6px;
-            color: #333;
+            color: var(--text-secondary);
             margin-bottom: 8px;
         }
         .modal .file-input-hidden {
             display: none;
         }
-        .modal .reset-btn-group {
+        .modal .reset-btn-group,
+        .modal .clear-btn-group {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        .modal .reset-btn-group button {
+        .modal .reset-btn-group button,
+        .modal .clear-btn-group button {
             flex: 1 1 auto;
             min-width: 100px;
             padding: 9px 14px;
@@ -544,44 +649,65 @@
             font-size: 0.85rem;
             transition: var(--transition);
             font-family: var(--font);
-            background: #fff;
-            color: #111;
+            background: var(--card-bg);
+            color: var(--text);
         }
-        .modal .reset-btn-group button:hover {
-            background: #f0f0f0;
+        .modal .reset-btn-group button:hover,
+        .modal .clear-btn-group button:hover {
+            background: var(--btn-ghost-bg-hover);
             border-color: #000;
         }
         .modal .reset-btn-group button.reset-daily {
-            border-color: #1a3d6d;
-            color: #1a3d6d;
+            border-color: var(--reset-daily-border);
+            color: var(--reset-daily-text);
         }
         .modal .reset-btn-group button.reset-weekly {
-            border-color: #1e5ab5;
-            color: #1e5ab5;
+            border-color: var(--reset-weekly-border);
+            color: var(--reset-weekly-text);
         }
         .modal .reset-btn-group button.reset-monthly {
-            border-color: #2979ff;
-            color: #2979ff;
+            border-color: var(--reset-monthly-border);
+            color: var(--reset-monthly-text);
         }
         .modal .reset-btn-group button.reset-yearly {
-            border-color: #5a9cff;
-            color: #3b7ddd;
+            border-color: var(--reset-yearly-border);
+            color: var(--reset-yearly-text);
         }
         .modal .reset-btn-group button:hover {
             color: #fff;
         }
         .modal .reset-btn-group button.reset-daily:hover {
-            background: #1a3d6d;
+            background: var(--reset-daily-border);
         }
         .modal .reset-btn-group button.reset-weekly:hover {
-            background: #1e5ab5;
+            background: var(--reset-weekly-border);
         }
         .modal .reset-btn-group button.reset-monthly:hover {
-            background: #2979ff;
+            background: var(--reset-monthly-border);
         }
         .modal .reset-btn-group button.reset-yearly:hover {
-            background: #5a9cff;
+            background: var(--reset-yearly-border);
         }
+
+        .clear-btn-group button.clear-btn {
+            border-color: #c62828;
+            color: #c62828;
+        }
+        .clear-btn-group button.clear-btn:hover {
+            background: #c62828;
+            color: #fff;
+        }
+        .clear-all-btn {
+            background: #b71c1c;
+            color: #fff;
+            border-color: #b71c1c;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .clear-all-btn:hover {
+            background: #8e0000;
+        }
+
         .close-modal-btn {
             position: absolute;
             top: 12px;
@@ -590,15 +716,34 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: #666;
+            color: var(--delete-btn-color);
             transition: var(--transition);
             line-height: 1;
             padding: 4px 8px;
             border-radius: 4px;
         }
         .close-modal-btn:hover {
-            color: #111;
-            background: #eee;
+            color: var(--delete-btn-hover-color);
+            background: var(--delete-btn-hover-bg);
+        }
+
+        /* ── Dark mode toggle ──────────── */
+        .dark-mode-toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 8px 0 12px;
+        }
+        .dark-mode-toggle-row label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .dark-mode-toggle-row input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--blue-bright);
         }
 
         /* ── Toast ──────────────────────── */
@@ -607,8 +752,8 @@
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: #111;
-            color: #fff;
+            background: var(--toast-bg);
+            color: var(--toast-text);
             padding: 12px 22px;
             border-radius: 30px;
             font-weight: 600;
@@ -664,11 +809,10 @@
     </style>
 </head>
 <body>
-
     <!-- ═══════════ HEADER ═══════════ -->
     <header class="app-header">
         <h1><span class="icon">✅</span>Checklist App</h1>
-        <button class="btn btn-primary" id="openAddCategoryModal" title="Add a new category">
+        <button class="btn btn-primary" id="openAddCategoryModalBtn" onclick="openAddCategoryModal()">
             ＋ Add Category
         </button>
     </header>
@@ -679,7 +823,7 @@
         <section class="frequency-section" id="section-daily">
             <div class="frequency-header">
                 <h2>📋 Daily <span class="badge" id="badge-daily">0 categories</span></h2>
-                <button class="btn btn-outline btn-sm" data-frequency="daily" onclick="openAddCategoryWithFreq('daily')">＋ Add</button>
+                <button class="btn btn-outline btn-sm" onclick="openAddCategoryWithFreq('daily')">＋ Add</button>
             </div>
             <div class="categories-row" id="row-daily"></div>
             <div class="empty-group" id="empty-daily" style="display:none;">No daily categories yet. Click “＋ Add” to create one.</div>
@@ -689,7 +833,7 @@
         <section class="frequency-section" id="section-weekly">
             <div class="frequency-header">
                 <h2>📋 Weekly <span class="badge" id="badge-weekly">0 categories</span></h2>
-                <button class="btn btn-outline btn-sm" data-frequency="weekly" onclick="openAddCategoryWithFreq('weekly')">＋ Add</button>
+                <button class="btn btn-outline btn-sm" onclick="openAddCategoryWithFreq('weekly')">＋ Add</button>
             </div>
             <div class="categories-row" id="row-weekly"></div>
             <div class="empty-group" id="empty-weekly" style="display:none;">No weekly categories yet. Click “＋ Add” to create one.</div>
@@ -699,7 +843,7 @@
         <section class="frequency-section" id="section-monthly">
             <div class="frequency-header">
                 <h2>📋 Monthly <span class="badge" id="badge-monthly">0 categories</span></h2>
-                <button class="btn btn-outline btn-sm" data-frequency="monthly" onclick="openAddCategoryWithFreq('monthly')">＋ Add</button>
+                <button class="btn btn-outline btn-sm" onclick="openAddCategoryWithFreq('monthly')">＋ Add</button>
             </div>
             <div class="categories-row" id="row-monthly"></div>
             <div class="empty-group" id="empty-monthly" style="display:none;">No monthly categories yet. Click “＋ Add” to create one.</div>
@@ -709,7 +853,7 @@
         <section class="frequency-section" id="section-yearly">
             <div class="frequency-header">
                 <h2>📋 Yearly <span class="badge" id="badge-yearly">0 categories</span></h2>
-                <button class="btn btn-outline btn-sm" data-frequency="yearly" onclick="openAddCategoryWithFreq('yearly')">＋ Add</button>
+                <button class="btn btn-outline btn-sm" onclick="openAddCategoryWithFreq('yearly')">＋ Add</button>
             </div>
             <div class="categories-row" id="row-yearly"></div>
             <div class="empty-group" id="empty-yearly" style="display:none;">No yearly categories yet. Click “＋ Add” to create one.</div>
@@ -718,7 +862,7 @@
 
     <!-- ═══════════ SETTINGS COG ═══════════ -->
     <div class="settings-cog-wrapper">
-        <button class="settings-cog-btn" id="settingsCogBtn" title="Settings">⚙️</button>
+        <button class="settings-cog-btn" id="settingsCogBtn" onclick="openSettingsModal()" title="Settings">⚙️</button>
     </div>
 
     <!-- ═══════════ ADD CATEGORY MODAL ═══════════ -->
@@ -752,9 +896,17 @@
             <button class="close-modal-btn" onclick="closeSettingsModal()">✕</button>
             <h3>⚙️ Settings</h3>
 
+            <!-- Dark mode toggle -->
+            <div class="settings-section">
+                <div class="dark-mode-toggle-row">
+                    <label for="darkModeCheckbox">🌙 Dark Mode</label>
+                    <input type="checkbox" id="darkModeCheckbox" onchange="toggleDarkMode(this.checked)">
+                </div>
+            </div>
+
             <div class="settings-section">
                 <h4>🔄 Reset Completion Status</h4>
-                <p style="font-size:0.82rem;color:#555;margin-bottom:8px;">
+                <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:8px;">
                     Uncheck all tasks in categories of the selected frequency.
                 </p>
                 <div class="reset-btn-group">
@@ -768,13 +920,29 @@
             <hr class="divider">
 
             <div class="settings-section">
+                <h4>🗑️ Clear Categories & Tasks</h4>
+                <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:8px;">
+                    Permanently delete all categories and tasks for a specific frequency, or clear everything.
+                </p>
+                <div class="clear-btn-group">
+                    <button class="clear-btn" onclick="clearFrequency('daily')">Clear Daily</button>
+                    <button class="clear-btn" onclick="clearFrequency('weekly')">Clear Weekly</button>
+                    <button class="clear-btn" onclick="clearFrequency('monthly')">Clear Monthly</button>
+                    <button class="clear-btn" onclick="clearFrequency('yearly')">Clear Yearly</button>
+                </div>
+                <button class="btn btn-danger clear-all-btn" onclick="clearAllData()">⚠️ Clear EVERYTHING</button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="settings-section">
                 <h4>💾 Backup / Restore</h4>
-                <p style="font-size:0.82rem;color:#555;margin-bottom:8px;">
+                <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:8px;">
                     Save all categories and tasks to a file, or restore from a previous backup.
                 </p>
                 <div class="btn-row">
                     <button class="btn btn-primary btn-sm" onclick="backupData()">📥 Download Backup</button>
-                    <button class="btn btn-outline btn-sm" style="color:#111;border-color:#555;" onclick="document.getElementById('restoreFileInput').click()">📤 Restore Backup</button>
+                    <button class="btn btn-outline btn-sm" style="color:var(--text);border-color:var(--border-light);" onclick="document.getElementById('restoreFileInput').click()">📤 Restore Backup</button>
                 </div>
                 <input type="file" id="restoreFileInput" class="file-input-hidden" accept=".json" onchange="restoreData(event)">
             </div>
@@ -785,500 +953,480 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        (function() {
-            // ──────────────────────────────────────
-            // STORAGE KEY
-            // ──────────────────────────────────────
-            const STORAGE_KEY = 'checklist_app_data_v2';
+        // ──────────────────────────────────────
+        // GLOBAL SCOPE: Functions for onclick
+        // ──────────────────────────────────────
+        const STORAGE_KEY = 'checklist_app_data_v2';
+        const DARK_MODE_KEY = 'checklist_dark_mode';
 
-            // ──────────────────────────────────────
-            // DATA STRUCTURE
-            // ──────────────────────────────────────
-            // {
-            //   categories: [
-            //     {
-            //       id: string,
-            //       name: string,
-            //       frequency: 'daily'|'weekly'|'monthly'|'yearly',
-            //       tasks: [
-            //         { id: string, text: string, completed: boolean },
-            //         ...
-            //       ]
-            //     },
-            //     ...
-            //   ]
-            // }
-            // ──────────────────────────────────────
+        let appData = { categories: [] };
 
-            let appData = { categories: [] };
+        // Generate unique ID
+        function generateId() {
+            return 'id_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
+        }
 
-            // ──────────────────────────────────────
-            // UTILITY: Generate unique IDs
-            // ──────────────────────────────────────
-            function generateId() {
-                return 'id_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
-            }
-
-            // ──────────────────────────────────────
-            // STORAGE: Load & Save
-            // ──────────────────────────────────────
-            function loadData() {
-                try {
-                    const raw = localStorage.getItem(STORAGE_KEY);
-                    if (raw) {
-                        const parsed = JSON.parse(raw);
-                        if (parsed && Array.isArray(parsed.categories)) {
-                            appData = parsed;
-                            // Validate each category
-                            appData.categories = appData.categories.filter(cat =>
-                                cat && cat.id && cat.name && cat.frequency && Array.isArray(cat.tasks)
+        // Load data from localStorage
+        function loadData() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && Array.isArray(parsed.categories)) {
+                        appData = parsed;
+                        appData.categories = appData.categories.filter(cat =>
+                            cat && cat.id && cat.name && cat.frequency && Array.isArray(cat.tasks)
+                        );
+                        appData.categories.forEach(cat => {
+                            cat.tasks = cat.tasks.filter(t =>
+                                t && t.id && typeof t.text === 'string' && typeof t.completed === 'boolean'
                             );
-                            // Validate each task
-                            appData.categories.forEach(cat => {
-                                cat.tasks = cat.tasks.filter(t =>
-                                    t && t.id && typeof t.text === 'string' && typeof t
-                                    .completed === 'boolean'
-                                );
-                            });
-                        }
+                        });
                     }
-                } catch (e) {
-                    console.warn('Failed to load data, starting fresh.', e);
-                    appData = { categories: [] };
                 }
-                // Also set a small cookie as a marker (respecting the cookie requirement)
+            } catch (e) {
+                console.warn('Failed to load data, starting fresh.', e);
+                appData = { categories: [] };
+            }
+            setMarkerCookie();
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
                 setMarkerCookie();
+            } catch (e) {
+                showToast('⚠️ Failed to save data. Storage may be full.');
+                console.error('Save error:', e);
             }
+        }
 
-            function saveData() {
-                try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-                    setMarkerCookie();
-                } catch (e) {
-                    showToast('⚠️ Failed to save data. Storage may be full.');
-                    console.error('Save error:', e);
-                }
+        function setMarkerCookie() {
+            const d = new Date();
+            d.setFullYear(d.getFullYear() + 1);
+            document.cookie = 'checklist_app_has_data=true; expires=' + d.toUTCString() + '; path=/; SameSite=Lax';
+        }
+
+        // Toast notification
+        function showToast(message, duration = 2200) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
+        }
+
+        // Render everything
+        const frequencies = ['daily', 'weekly', 'monthly', 'yearly'];
+
+        function getCategoriesByFrequency(freq) {
+            return appData.categories.filter(c => c.frequency === freq);
+        }
+
+        function renderAll() {
+            frequencies.forEach(freq => renderFrequencyGroup(freq));
+        }
+
+        function renderFrequencyGroup(freq) {
+            const rowEl = document.getElementById('row-' + freq);
+            const emptyEl = document.getElementById('empty-' + freq);
+            const badgeEl = document.getElementById('badge-' + freq);
+            const categories = getCategoriesByFrequency(freq);
+
+            badgeEl.textContent = categories.length + ' ' + (categories.length === 1 ? 'category' : 'categories');
+            rowEl.innerHTML = '';
+
+            if (categories.length === 0) {
+                emptyEl.style.display = 'flex';
+                rowEl.style.display = 'none';
+            } else {
+                emptyEl.style.display = 'none';
+                rowEl.style.display = 'flex';
+                categories.forEach(cat => {
+                    rowEl.appendChild(createCategoryCard(cat));
+                });
             }
+        }
 
-            function setMarkerCookie() {
-                // Set a simple cookie indicating data exists (expires in 365 days)
-                const d = new Date();
-                d.setFullYear(d.getFullYear() + 1);
-                document.cookie = 'checklist_app_has_data=true; expires=' + d.toUTCString() +
-                    '; path=/; SameSite=Lax';
-            }
+        function createCategoryCard(category) {
+            const card = document.createElement('div');
+            card.className = 'category-card';
+            card.setAttribute('data-category-id', category.id);
 
-            // ──────────────────────────────────────
-            // TOAST
-            // ──────────────────────────────────────
-            function showToast(message, duration = 2200) {
-                const toast = document.getElementById('toast');
-                toast.textContent = message;
-                toast.classList.add('show');
-                clearTimeout(toast._timeout);
-                toast._timeout = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, duration);
-            }
+            // Header
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'cat-name';
+            nameSpan.textContent = category.name;
+            nameSpan.title = category.name;
+            const delBtn = document.createElement('button');
+            delBtn.className = 'delete-cat-btn';
+            delBtn.innerHTML = '✕';
+            delBtn.title = 'Delete category';
+            delBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteCategory(category.id);
+            });
+            header.appendChild(nameSpan);
+            header.appendChild(delBtn);
 
-            // ──────────────────────────────────────
-            // RENDER ALL
-            // ──────────────────────────────────────
-            const frequencies = ['daily', 'weekly', 'monthly', 'yearly'];
+            // Task list
+            const taskList = document.createElement('ul');
+            taskList.className = 'task-list';
+            if (category.tasks.length === 0) {
+                const noTasks = document.createElement('li');
+                noTasks.className = 'no-tasks';
+                noTasks.textContent = 'No tasks yet';
+                taskList.appendChild(noTasks);
+            } else {
+                category.tasks.forEach(task => {
+                    const li = document.createElement('li');
+                    li.className = 'task-item' + (task.completed ? ' completed' : '');
+                    li.setAttribute('data-task-id', task.id);
 
-            function getCategoriesByFrequency(freq) {
-                return appData.categories.filter(c => c.frequency === freq);
-            }
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.className = 'task-checkbox';
+                    checkbox.checked = task.completed;
+                    checkbox.addEventListener('change', () => {
+                        toggleTask(category.id, task.id, checkbox.checked);
+                    });
 
-            function renderAll() {
-                frequencies.forEach(freq => {
-                    renderFrequencyGroup(freq);
+                    const textSpan = document.createElement('span');
+                    textSpan.className = 'task-text';
+                    textSpan.textContent = task.text;
+
+                    const delTaskBtn = document.createElement('button');
+                    delTaskBtn.className = 'delete-task-btn';
+                    delTaskBtn.innerHTML = '✕';
+                    delTaskBtn.title = 'Delete task';
+                    delTaskBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        deleteTask(category.id, task.id);
+                    });
+
+                    li.appendChild(checkbox);
+                    li.appendChild(textSpan);
+                    li.appendChild(delTaskBtn);
+                    taskList.appendChild(li);
                 });
             }
 
-            function renderFrequencyGroup(freq) {
-                const rowEl = document.getElementById('row-' + freq);
-                const emptyEl = document.getElementById('empty-' + freq);
-                const badgeEl = document.getElementById('badge-' + freq);
-                const categories = getCategoriesByFrequency(freq);
-
-                // Update badge
-                badgeEl.textContent = categories.length + ' ' + (categories.length === 1 ? 'category' :
-                    'categories');
-
-                // Clear row
-                rowEl.innerHTML = '';
-
-                if (categories.length === 0) {
-                    emptyEl.style.display = 'flex';
-                    rowEl.style.display = 'none';
-                } else {
-                    emptyEl.style.display = 'none';
-                    rowEl.style.display = 'flex';
-                    categories.forEach(cat => {
-                        rowEl.appendChild(createCategoryCard(cat));
-                    });
+            // Add task row
+            const addRow = document.createElement('div');
+            addRow.className = 'add-task-row';
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.placeholder = 'New task...';
+            input.maxLength = 150;
+            input.setAttribute('autocomplete', 'off');
+            const addBtn = document.createElement('button');
+            addBtn.textContent = 'Add';
+            addBtn.addEventListener('click', () => {
+                const text = input.value.trim();
+                if (text) {
+                    addTask(category.id, text);
+                    input.value = '';
                 }
-            }
-
-            function createCategoryCard(category) {
-                const card = document.createElement('div');
-                card.className = 'category-card';
-                card.setAttribute('data-category-id', category.id);
-
-                // Header
-                const header = document.createElement('div');
-                header.className = 'card-header';
-                const nameSpan = document.createElement('span');
-                nameSpan.className = 'cat-name';
-                nameSpan.textContent = category.name;
-                nameSpan.title = category.name;
-                const delBtn = document.createElement('button');
-                delBtn.className = 'delete-cat-btn';
-                delBtn.innerHTML = '✕';
-                delBtn.title = 'Delete category';
-                delBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    deleteCategory(category.id);
-                });
-                header.appendChild(nameSpan);
-                header.appendChild(delBtn);
-
-                // Task list
-                const taskList = document.createElement('ul');
-                taskList.className = 'task-list';
-                if (category.tasks.length === 0) {
-                    const noTasks = document.createElement('li');
-                    noTasks.className = 'no-tasks';
-                    noTasks.textContent = 'No tasks yet';
-                    taskList.appendChild(noTasks);
-                } else {
-                    category.tasks.forEach(task => {
-                        const li = document.createElement('li');
-                        li.className = 'task-item' + (task.completed ? ' completed' : '');
-                        li.setAttribute('data-task-id', task.id);
-
-                        const checkbox = document.createElement('input');
-                        checkbox.type = 'checkbox';
-                        checkbox.className = 'task-checkbox';
-                        checkbox.checked = task.completed;
-                        checkbox.addEventListener('change', () => {
-                            toggleTask(category.id, task.id, checkbox.checked);
-                        });
-
-                        const textSpan = document.createElement('span');
-                        textSpan.className = 'task-text';
-                        textSpan.textContent = task.text;
-
-                        const delTaskBtn = document.createElement('button');
-                        delTaskBtn.className = 'delete-task-btn';
-                        delTaskBtn.innerHTML = '✕';
-                        delTaskBtn.title = 'Delete task';
-                        delTaskBtn.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            deleteTask(category.id, task.id);
-                        });
-
-                        li.appendChild(checkbox);
-                        li.appendChild(textSpan);
-                        li.appendChild(delTaskBtn);
-                        taskList.appendChild(li);
-                    });
-                }
-
-                // Add task row
-                const addRow = document.createElement('div');
-                addRow.className = 'add-task-row';
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.placeholder = 'New task...';
-                input.maxLength = 150;
-                input.setAttribute('autocomplete', 'off');
-                const addBtn = document.createElement('button');
-                addBtn.textContent = 'Add';
-                addBtn.addEventListener('click', () => {
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
                     const text = input.value.trim();
                     if (text) {
                         addTask(category.id, text);
                         input.value = '';
                     }
-                });
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        const text = input.value.trim();
-                        if (text) {
-                            addTask(category.id, text);
-                            input.value = '';
-                        }
-                    }
-                });
-                addRow.appendChild(input);
-                addRow.appendChild(addBtn);
-
-                card.appendChild(header);
-                card.appendChild(taskList);
-                card.appendChild(addRow);
-                return card;
-            }
-
-            // ──────────────────────────────────────
-            // CRUD OPERATIONS
-            // ──────────────────────────────────────
-            function addCategory(name, frequency) {
-                const newCategory = {
-                    id: generateId(),
-                    name: name.trim(),
-                    frequency: frequency,
-                    tasks: []
-                };
-                appData.categories.push(newCategory);
-                saveData();
-                renderAll();
-                showToast('✅ Category "' + name.trim() + '" created!');
-            }
-
-            function deleteCategory(categoryId) {
-                const cat = appData.categories.find(c => c.id === categoryId);
-                if (!cat) return;
-                if (!confirm('Delete the category "' + cat.name + '" and all its tasks? This cannot be undone.')) {
-                    return;
                 }
-                appData.categories = appData.categories.filter(c => c.id !== categoryId);
-                saveData();
-                renderAll();
-                showToast('🗑️ Category deleted.');
+            });
+            addRow.appendChild(input);
+            addRow.appendChild(addBtn);
+
+            card.appendChild(header);
+            card.appendChild(taskList);
+            card.appendChild(addRow);
+            return card;
+        }
+
+        // ── CRUD ──────────────────────────
+        function addCategory(name, frequency) {
+            const newCategory = {
+                id: generateId(),
+                name: name.trim(),
+                frequency: frequency,
+                tasks: []
+            };
+            appData.categories.push(newCategory);
+            saveData();
+            renderAll();
+            showToast('✅ Category "' + name.trim() + '" created!');
+        }
+
+        function deleteCategory(categoryId) {
+            const cat = appData.categories.find(c => c.id === categoryId);
+            if (!cat) return;
+            if (!confirm('Delete the category "' + cat.name + '" and all its tasks? This cannot be undone.')) {
+                return;
             }
+            appData.categories = appData.categories.filter(c => c.id !== categoryId);
+            saveData();
+            renderAll();
+            showToast('🗑️ Category deleted.');
+        }
 
-            function addTask(categoryId, taskText) {
-                const cat = appData.categories.find(c => c.id === categoryId);
-                if (!cat) return;
-                const newTask = {
-                    id: generateId(),
-                    text: taskText.trim(),
-                    completed: false
-                };
-                cat.tasks.push(newTask);
-                saveData();
-                renderAll();
-            }
+        function addTask(categoryId, taskText) {
+            const cat = appData.categories.find(c => c.id === categoryId);
+            if (!cat) return;
+            const newTask = {
+                id: generateId(),
+                text: taskText.trim(),
+                completed: false
+            };
+            cat.tasks.push(newTask);
+            saveData();
+            renderAll();
+        }
 
-            function deleteTask(categoryId, taskId) {
-                const cat = appData.categories.find(c => c.id === categoryId);
-                if (!cat) return;
-                cat.tasks = cat.tasks.filter(t => t.id !== taskId);
-                saveData();
-                renderAll();
-            }
+        function deleteTask(categoryId, taskId) {
+            const cat = appData.categories.find(c => c.id === categoryId);
+            if (!cat) return;
+            cat.tasks = cat.tasks.filter(t => t.id !== taskId);
+            saveData();
+            renderAll();
+        }
 
-            function toggleTask(categoryId, taskId, completed) {
-                const cat = appData.categories.find(c => c.id === categoryId);
-                if (!cat) return;
-                const task = cat.tasks.find(t => t.id === taskId);
-                if (!task) return;
-                task.completed = completed;
-                saveData();
-                // Re-render just this category card for efficiency
-                renderAll();
-            }
+        function toggleTask(categoryId, taskId, completed) {
+            const cat = appData.categories.find(c => c.id === categoryId);
+            if (!cat) return;
+            const task = cat.tasks.find(t => t.id === taskId);
+            if (!task) return;
+            task.completed = completed;
+            saveData();
+            renderAll();
+        }
 
-            function resetByFrequency(frequency) {
-                const count = appData.categories.filter(c => c.frequency === frequency).reduce((acc, cat) => {
-                    let changed = 0;
-                    cat.tasks.forEach(t => {
-                        if (t.completed) {
-                            t.completed = false;
-                            changed++;
-                        }
-                    });
-                    return acc + changed;
-                }, 0);
-
-                if (count === 0) {
-                    const freqLabel = frequency.charAt(0).toUpperCase() + frequency.slice(1);
-                    if (!confirm('No completed tasks found for ' + freqLabel +
-                            ' categories. Reset anyway? (This will ensure all tasks are unchecked.)')) {
-                        return;
-                    }
-                } else {
-                    const freqLabel = frequency.charAt(0).toUpperCase() + frequency.slice(1);
-                    if (!confirm('Reset ' + count + ' completed task(s) across all ' + freqLabel +
-                            ' categories? This will uncheck them all.')) {
-                        return;
-                    }
-                }
-
-                // Actually reset
-                appData.categories.forEach(cat => {
-                    if (cat.frequency === frequency) {
-                        cat.tasks.forEach(t => { t.completed = false; });
+        // ── Reset (uncheck) ──────────────
+        function resetByFrequency(frequency) {
+            const count = appData.categories.filter(c => c.frequency === frequency).reduce((acc, cat) => {
+                let changed = 0;
+                cat.tasks.forEach(t => {
+                    if (t.completed) {
+                        t.completed = false;
+                        changed++;
                     }
                 });
-                saveData();
-                renderAll();
-                const freqLabel = frequency.charAt(0).toUpperCase() + frequency.slice(1);
-                showToast('🔄 All ' + freqLabel + ' tasks have been unchecked.');
-                closeSettingsModal();
+                return acc + changed;
+            }, 0);
+
+            const freqLabel = frequency.charAt(0).toUpperCase() + frequency.slice(1);
+            if (!confirm('Reset ' + freqLabel + ' tasks? This will uncheck all completed tasks in ' + freqLabel + ' categories.')) {
+                return;
             }
 
-            // ──────────────────────────────────────
-            // BACKUP / RESTORE
-            // ──────────────────────────────────────
-            function backupData() {
-                const dataStr = JSON.stringify(appData, null, 2);
-                const blob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                const timestamp = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
-                a.download = 'checklist-backup-' + timestamp + '.json';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                showToast('💾 Backup downloaded!');
-                closeSettingsModal();
-            }
-
-            function restoreData(event) {
-                const file = event.target.files[0];
-                if (!file) return;
-                if (!confirm(
-                        'Restoring will REPLACE all current categories and tasks with the backup data. Continue?'
-                        )) {
-                    event.target.value = '';
-                    return;
+            appData.categories.forEach(cat => {
+                if (cat.frequency === frequency) {
+                    cat.tasks.forEach(t => { t.completed = false; });
                 }
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const parsed = JSON.parse(e.target.result);
-                        if (!parsed || !Array.isArray(parsed.categories)) {
-                            throw new Error('Invalid backup file format.');
-                        }
-                        // Validate structure
-                        parsed.categories.forEach(cat => {
-                            if (!cat.id || !cat.name || !cat.frequency || !Array.isArray(cat.tasks)) {
-                                throw new Error('Invalid category structure in backup.');
-                            }
-                            cat.tasks.forEach(t => {
-                                if (!t.id || typeof t.text !== 'string' || typeof t.completed !==
-                                    'boolean') {
-                                    throw new Error('Invalid task structure in backup.');
-                                }
-                            });
-                        });
-                        appData = parsed;
-                        saveData();
-                        renderAll();
-                        showToast('📤 Data restored successfully! (' + parsed.categories.length +
-                            ' categories)');
-                        closeSettingsModal();
-                    } catch (err) {
-                        showToast('⚠️ Failed to restore: ' + err.message);
-                        console.error('Restore error:', err);
-                    }
-                };
-                reader.readAsText(file);
+            });
+            saveData();
+            renderAll();
+            showToast('🔄 All ' + freqLabel + ' tasks have been unchecked.');
+            closeSettingsModal();
+        }
+
+        // ── Clear (delete categories) ─────
+        function clearFrequency(frequency) {
+            const cats = appData.categories.filter(c => c.frequency === frequency);
+            if (cats.length === 0) {
+                showToast('No ' + frequency + ' categories to clear.');
+                return;
+            }
+            const freqLabel = frequency.charAt(0).toUpperCase() + frequency.slice(1);
+            if (!confirm('PERMANENTLY DELETE all ' + freqLabel + ' categories and their tasks? This cannot be undone.')) {
+                return;
+            }
+            appData.categories = appData.categories.filter(c => c.frequency !== frequency);
+            saveData();
+            renderAll();
+            showToast('🗑️ All ' + freqLabel + ' categories cleared.');
+            closeSettingsModal();
+        }
+
+        function clearAllData() {
+            if (appData.categories.length === 0) {
+                showToast('No categories to clear.');
+                return;
+            }
+            if (!confirm('⚠️ DELETE EVERYTHING? This will remove all categories and tasks permanently.')) {
+                return;
+            }
+            appData.categories = [];
+            saveData();
+            renderAll();
+            showToast('🗑️ All data cleared.');
+            closeSettingsModal();
+        }
+
+        // ── Backup / Restore ─────────────
+        function backupData() {
+            const dataStr = JSON.stringify(appData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const timestamp = new Date().toISOString().replace(/[:.]/g, '-').substring(0, 19);
+            a.download = 'checklist-backup-' + timestamp + '.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('💾 Backup downloaded!');
+            closeSettingsModal();
+        }
+
+        function restoreData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (!confirm('Restoring will REPLACE all current categories and tasks with the backup data. Continue?')) {
                 event.target.value = '';
+                return;
             }
-
-            // ──────────────────────────────────────
-            // MODALS
-            // ──────────────────────────────────────
-            function openAddCategoryModal() {
-                document.getElementById('catNameInput').value = '';
-                document.getElementById('catFrequencySelect').value = 'daily';
-                document.getElementById('addCategoryModalOverlay').classList.add('active');
-                setTimeout(() => {
-                    document.getElementById('catNameInput').focus();
-                }, 150);
-            }
-
-            function openAddCategoryWithFreq(frequency) {
-                document.getElementById('catNameInput').value = '';
-                document.getElementById('catFrequencySelect').value = frequency;
-                document.getElementById('addCategoryModalOverlay').classList.add('active');
-                setTimeout(() => {
-                    document.getElementById('catNameInput').focus();
-                }, 150);
-            }
-
-            function closeAddCategoryModal() {
-                document.getElementById('addCategoryModalOverlay').classList.remove('active');
-            }
-
-            function confirmAddCategory() {
-                const name = document.getElementById('catNameInput').value.trim();
-                const frequency = document.getElementById('catFrequencySelect').value;
-                if (!name) {
-                    showToast('⚠️ Please enter a category name.');
-                    document.getElementById('catNameInput').focus();
-                    return;
-                }
-                if (!['daily', 'weekly', 'monthly', 'yearly'].includes(frequency)) {
-                    showToast('⚠️ Please select a valid frequency.');
-                    return;
-                }
-                addCategory(name, frequency);
-                closeAddCategoryModal();
-            }
-
-            function openSettingsModal() {
-                document.getElementById('settingsModalOverlay').classList.add('active');
-            }
-
-            function closeSettingsModal() {
-                document.getElementById('settingsModalOverlay').classList.remove('active');
-            }
-
-            // ──────────────────────────────────────
-            // EVENT LISTENERS
-            // ──────────────────────────────────────
-            document.getElementById('openAddCategoryModal').addEventListener('click', openAddCategoryModal);
-            document.getElementById('settingsCogBtn').addEventListener('click', openSettingsModal);
-
-            // Close modals when clicking overlay
-            document.getElementById('addCategoryModalOverlay').addEventListener('click', function(e) {
-                if (e.target === this) closeAddCategoryModal();
-            });
-            document.getElementById('settingsModalOverlay').addEventListener('click', function(e) {
-                if (e.target === this) closeSettingsModal();
-            });
-
-            // Close modals with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    if (document.getElementById('settingsModalOverlay').classList.contains('active')) {
-                        closeSettingsModal();
-                    } else if (document.getElementById('addCategoryModalOverlay').classList.contains(
-                            'active')) {
-                        closeAddCategoryModal();
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (!parsed || !Array.isArray(parsed.categories)) {
+                        throw new Error('Invalid backup file format.');
                     }
+                    parsed.categories.forEach(cat => {
+                        if (!cat.id || !cat.name || !cat.frequency || !Array.isArray(cat.tasks)) {
+                            throw new Error('Invalid category structure in backup.');
+                        }
+                        cat.tasks.forEach(t => {
+                            if (!t.id || typeof t.text !== 'string' || typeof t.completed !== 'boolean') {
+                                throw new Error('Invalid task structure in backup.');
+                            }
+                        });
+                    });
+                    appData = parsed;
+                    saveData();
+                    renderAll();
+                    showToast('📤 Data restored successfully! (' + parsed.categories.length + ' categories)');
+                    closeSettingsModal();
+                } catch (err) {
+                    showToast('⚠️ Failed to restore: ' + err.message);
+                    console.error('Restore error:', err);
                 }
-                // Also Enter key in add-category modal
-                if (e.key === 'Enter' && document.getElementById('addCategoryModalOverlay').classList.contains(
-                        'active')) {
-                    if (document.activeElement === document.getElementById('catNameInput') ||
-                        document.activeElement === document.getElementById('catFrequencySelect')) {
-                        confirmAddCategory();
-                    }
-                }
-            });
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
 
-            // ──────────────────────────────────────
-            // INITIALIZATION
-            // ──────────────────────────────────────
+        // ── Modal handlers ────────────────
+        function openAddCategoryModal() {
+            document.getElementById('catNameInput').value = '';
+            document.getElementById('catFrequencySelect').value = 'daily';
+            document.getElementById('addCategoryModalOverlay').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('catNameInput').focus();
+            }, 150);
+        }
+
+        function openAddCategoryWithFreq(frequency) {
+            document.getElementById('catNameInput').value = '';
+            document.getElementById('catFrequencySelect').value = frequency;
+            document.getElementById('addCategoryModalOverlay').classList.add('active');
+            setTimeout(() => {
+                document.getElementById('catNameInput').focus();
+            }, 150);
+        }
+
+        function closeAddCategoryModal() {
+            document.getElementById('addCategoryModalOverlay').classList.remove('active');
+        }
+
+        function confirmAddCategory() {
+            const name = document.getElementById('catNameInput').value.trim();
+            const frequency = document.getElementById('catFrequencySelect').value;
+            if (!name) {
+                showToast('⚠️ Please enter a category name.');
+                document.getElementById('catNameInput').focus();
+                return;
+            }
+            if (!['daily', 'weekly', 'monthly', 'yearly'].includes(frequency)) {
+                showToast('⚠️ Please select a valid frequency.');
+                return;
+            }
+            addCategory(name, frequency);
+            closeAddCategoryModal();
+        }
+
+        function openSettingsModal() {
+            document.getElementById('settingsModalOverlay').classList.add('active');
+            const isDark = document.documentElement.classList.contains('dark-mode');
+            document.getElementById('darkModeCheckbox').checked = isDark;
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settingsModalOverlay').classList.remove('active');
+        }
+
+        // ── Dark mode ────────────────────
+        function toggleDarkMode(enable) {
+            if (enable) {
+                document.documentElement.classList.add('dark-mode');
+                localStorage.setItem(DARK_MODE_KEY, 'true');
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                localStorage.setItem(DARK_MODE_KEY, 'false');
+            }
+        }
+
+        function loadDarkModePreference() {
+            const saved = localStorage.getItem(DARK_MODE_KEY);
+            if (saved === 'true') {
+                document.documentElement.classList.add('dark-mode');
+                const cb = document.getElementById('darkModeCheckbox');
+                if (cb) cb.checked = true;
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+            }
+        }
+
+        // ── Event listeners for overlays ──
+        document.getElementById('addCategoryModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeAddCategoryModal();
+        });
+        document.getElementById('settingsModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) closeSettingsModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('settingsModalOverlay').classList.contains('active')) {
+                    closeSettingsModal();
+                } else if (document.getElementById('addCategoryModalOverlay').classList.contains('active')) {
+                    closeAddCategoryModal();
+                }
+            }
+            if (e.key === 'Enter' && document.getElementById('addCategoryModalOverlay').classList.contains('active')) {
+                if (document.activeElement === document.getElementById('catNameInput') ||
+                    document.activeElement === document.getElementById('catFrequencySelect')) {
+                    confirmAddCategory();
+                }
+            }
+        });
+
+        // ── Initialization ────────────────
+        function init() {
+            loadDarkModePreference();
             loadData();
             renderAll();
-
-            // Log storage info
-            console.log('Checklist App initialized.');
-            console.log('Categories loaded:', appData.categories.length);
-            console.log('Total tasks:',
-                appData.categories.reduce((sum, c) => sum + c.tasks.length, 0));
-            console.log('Data stored in localStorage key:', STORAGE_KEY);
-            console.log('Cookie marker set: checklist_app_has_data');
-        })();
+            console.log('Checklist App ready. Categories:', appData.categories.length);
+        }
+        init();
     </script>
 </body>
 </html>
