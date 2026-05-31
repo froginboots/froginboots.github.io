@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
-	<link rel="manifest" href="/favicon/site.webmanifest">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<link rel="manifest" href="favicon/site.webmanifest">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✅ Checklist</title>
+    <title>✅</title>
     <style>
         :root {
             --bg: #ffffff;
@@ -122,7 +122,6 @@
             color: var(--text);
             min-height: 100vh;
             line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
             transition: background 0.3s ease, color 0.3s ease;
         }
 
@@ -225,6 +224,15 @@
         }
         .category-card.dragging { opacity: 0.4; }
 
+        /* When auto-expand is on, remove max-height restrictions */
+        .auto-expand .category-card {
+            max-height: none;
+        }
+        .auto-expand .task-list {
+            max-height: none;
+            overflow-y: visible;
+        }
+
         .card-header {
             background: var(--card-header-bg);
             padding: 11px 14px;
@@ -276,7 +284,12 @@
             gap: 4px;
             min-height: 40px;
             max-height: 270px;
+            scrollbar-width: thin;
+            scrollbar-color: #c8cdd4 transparent;
         }
+        .task-list::-webkit-scrollbar { width: 5px; }
+        .task-list::-webkit-scrollbar-track { background: transparent; }
+        .task-list::-webkit-scrollbar-thumb { background: #c8cdd4; border-radius: 3px; }
 
         .task-item {
             display: flex;
@@ -360,11 +373,21 @@
 
         .settings-cog-wrapper { position: fixed; bottom: 24px; right: 24px; z-index: 200; }
         .settings-cog-btn {
-            width: 52px; height: 52px; border-radius: 50%;
-            background: var(--settings-cog-bg); color: #fff;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--settings-cog-bg);
+            color: #fff;
             border: 3px solid var(--settings-cog-border);
-            box-shadow: var(--shadow-lg); cursor: pointer;
-            font-size: 1.6rem; display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            padding: 0;
+            transition: var(--transition);
         }
         .settings-cog-btn:hover { background: #0f2747; }
 
@@ -447,18 +470,21 @@
             text-align: center;
             justify-content: center;
         }
-        .dark-mode-toggle-row {
+        .dark-mode-toggle-row,
+        .expand-mode-toggle-row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             margin: 8px 0 12px;
         }
-        .dark-mode-toggle-row label {
+        .dark-mode-toggle-row label,
+        .expand-mode-toggle-row label {
             margin-bottom: 0;
             cursor: pointer;
         }
-        .dark-mode-toggle-row input[type="checkbox"] {
+        .dark-mode-toggle-row input[type="checkbox"],
+        .expand-mode-toggle-row input[type="checkbox"] {
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -500,7 +526,7 @@
         </section>
     </div>
 
-    <div class="settings-cog-wrapper"><button class="settings-cog-btn" onclick="openSettingsModal()">⚙️</button></div>
+    <div class="settings-cog-wrapper"><button class="settings-cog-btn" onclick="openSettingsModal()" title="Settings">⚙️</button></div>
 
     <div class="modal-overlay" id="addCategoryModalOverlay">
         <div class="modal">
@@ -519,6 +545,11 @@
             <div class="dark-mode-toggle-row">
                 <label for="darkModeCheckbox">🌙 Dark Mode</label>
                 <input type="checkbox" id="darkModeCheckbox" onchange="toggleDarkMode(this.checked)">
+            </div>
+            <div class="expand-mode-toggle-row">
+                <label for="expandModeCheckbox">↕️ Auto-expand Categories</label>
+                <input type="checkbox" id="expandModeCheckbox" onchange="toggleExpandMode(this.checked)">
+                <span style="font-size:0.8rem;color:var(--text-secondary);">(instead of scrolling)</span>
             </div>
             <div class="settings-section"><h4>🔄 Reset Completion</h4><div class="reset-btn-group">
                 <button class="reset-daily" onclick="resetByFrequency('daily')">Reset Daily</button>
@@ -547,6 +578,7 @@
         (function() {
             const STORAGE_KEY = 'checklist_app_final';
             const DARK_MODE_KEY = 'checklist_dark_mode';
+            const EXPAND_MODE_KEY = 'checklist_expand_mode';
             const frequencies = ['daily', 'weekly', 'monthly', 'yearly'];
             let appData = { categories: [] };
             let dragInfo = null;
@@ -1011,8 +1043,10 @@
             window.openSettingsModal = () => {
                 document.getElementById('settingsModalOverlay').classList.add('active');
                 document.getElementById('darkModeCheckbox').checked = document.documentElement.classList.contains('dark-mode');
+                document.getElementById('expandModeCheckbox').checked = document.body.classList.contains('auto-expand');
             };
             window.closeSettingsModal = () => document.getElementById('settingsModalOverlay').classList.remove('active');
+
             window.toggleDarkMode = enable => {
                 if (enable) {
                     document.documentElement.classList.add('dark-mode');
@@ -1022,10 +1056,24 @@
                     localStorage.setItem(DARK_MODE_KEY, 'false');
                 }
             };
+            window.toggleExpandMode = enable => {
+                if (enable) {
+                    document.body.classList.add('auto-expand');
+                    localStorage.setItem(EXPAND_MODE_KEY, 'true');
+                } else {
+                    document.body.classList.remove('auto-expand');
+                    localStorage.setItem(EXPAND_MODE_KEY, 'false');
+                }
+            };
 
+            // Init
             if (localStorage.getItem(DARK_MODE_KEY) === 'true') {
                 document.documentElement.classList.add('dark-mode');
             }
+            if (localStorage.getItem(EXPAND_MODE_KEY) === 'true') {
+                document.body.classList.add('auto-expand');
+            }
+
             document.getElementById('addCategoryModalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeAddCategoryModal(); });
             document.getElementById('settingsModalOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeSettingsModal(); });
             document.addEventListener('keydown', e => {
